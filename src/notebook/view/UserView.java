@@ -17,18 +17,16 @@ public class UserView {
         Commands com;
 
         while (true) {
-            String command = prompt("Введите команду: ");
+            String command = prompt("Р’РІРµРґРёС‚Рµ РєРѕРјР°РЅРґСѓ: ");
             com = Commands.valueOf(command);
             if (com == Commands.EXIT) return;
             switch (com) {
                 case CREATE:
-                    String firstName = prompt("Имя: ");
-                    String lastName = prompt("Фамилия: ");
-                    String phone = prompt("Номер телефона: ");
-                    userController.saveUser(new User(firstName, lastName, phone));
+                    User u = createUser();
+                    userController.saveUser(u);
                     break;
                 case READ:
-                    String id = prompt("Идентификатор пользователя: ");
+                    String id = prompt("РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: ");
                     try {
                         User user = userController.readUser(Long.parseLong(id));
                         System.out.println(user);
@@ -37,6 +35,9 @@ public class UserView {
                         throw new RuntimeException(e);
                     }
                     break;
+                case UPDATE:
+                    String userId = prompt("Enter user id: ");
+                    userController.updateUser(userId, createUser());
             }
         }
     }
@@ -45,5 +46,12 @@ public class UserView {
         Scanner in = new Scanner(System.in);
         System.out.print(message);
         return in.nextLine();
+    }
+
+    private User createUser() {
+        String firstName = prompt("РРјСЏ: ");
+        String lastName = prompt("Р¤Р°РјРёР»РёСЏ: ");
+        String phone = prompt("РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°: ");
+        return new User(firstName, lastName, phone);
     }
 }
