@@ -4,12 +4,14 @@ import notebook.model.User;
 import notebook.model.repository.GBRepository;
 import notebook.util.UserValidator;
 
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class UserController {
     private final GBRepository repository;
+
 
     public UserController(GBRepository repository) {
         this.repository = repository;
@@ -22,17 +24,20 @@ public class UserController {
     public User createUser() {
         UserValidator validator = new UserValidator();
 
+
         String firstName = prompt("Имя: ");
         String lastName = prompt("Фамилия: ");
         String phone = prompt("Номер телефона: ");
 
-        return validator.validate(new User(validator.validStr(firstName), validator.validStr(lastName), validator.validStr(phone)));
+        return validator.validate(new User(firstName, lastName, phone));
     }
     public String prompt(String message) {
+        UserValidator val = new UserValidator();
         Scanner in = new Scanner(System.in);
         System.out.print(message);
-        return in.nextLine();
+        return val.validStr(in.nextLine());
     }
+
     public User readUser(Long userId) throws Exception {
         List<User> users = repository.findAll();
         for (User user : users) {

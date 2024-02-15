@@ -1,7 +1,7 @@
 package notebook.model.repository.impl;
 
 import notebook.util.DBConnector;
-import notebook.util.UserValidator;
+
 import notebook.util.mapper.impl.UserMapper;
 import notebook.model.User;
 import notebook.model.repository.GBRepository;

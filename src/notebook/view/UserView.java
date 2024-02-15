@@ -2,10 +2,7 @@ package notebook.view;
 
 import notebook.controller.UserController;
 import notebook.model.User;
-import notebook.util.Commands;
-import notebook.util.UserValidator;
 
-import java.util.Scanner;
 
 public class UserView {
     private final UserController userController;
@@ -15,7 +12,7 @@ public class UserView {
     }
 
     public void run(){
-        Commands com;
+        //Commands com;
 
         while (true) {
             System.out.println("Use: 1 - Create new note, 2 - Read note by id, 3 - Read all notes, 4 - Change note," +
@@ -48,6 +45,7 @@ public class UserView {
                 case "4":
                     String userId = userController.prompt("Enter user id: ");
                     userController.updateUser(userId, userController.createUser());
+
             }
         }
     }
